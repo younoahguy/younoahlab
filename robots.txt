@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://younoahlab.com/sitemap.xml
