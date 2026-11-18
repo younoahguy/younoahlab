@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://mwupuynuefijsakcvxwf.supabase.co; manifest-src 'self'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>You Noah Lab: Interactive Science Lab for Kids | Meet NOAH</title>
 <meta name="description" content="Meet NOAH, the AI guide who lives inside a 3D science lab for kids. 13 hands-on labs: chemistry, circuits, DNA, magnets, light and more. Real math, real data.">
@@ -689,7 +689,7 @@ main{overflow-x:clip}
     <details><summary>What devices does it work on?</summary><p>Phones, tablets, Chromebooks and computers with a modern web browser. Nothing needs to be installed.</p></details>
     <div class="row" style="margin-top:14px"><button type="button" class="btn primary" id="shareBtn">🔗 Share the lab</button><span class="note">younoahlab.com</span></div>
   </div>
-  <p class="note footnote" style="text-align:center"><b>younoahlab.com</b> · by You Noah Guy · No ads · No account needed · Nothing is collected about you · Data from real science references (NIST, IUPAC, NASA, NIH &amp; friends) · Everything here is virtual, and real experiments need a grown-up! 🥽</p>
+  <p class="note footnote" style="text-align:center"><b>younoahlab.com</b> · by You Noah Guy · No ads · No account needed · No tracking · Data from real science references (NIST, IUPAC, NASA, NIH &amp; friends) · Everything here is virtual, and real experiments need a grown-up! 🥽</p>
 </section>
 
 <!-- ============ ELEMENT EXPLORER ============ -->
@@ -1510,7 +1510,7 @@ mad:"The no-limits room! 🚀 Guess first, THEN run the real experiment. Being w
 
 function noahSay(txt,autohide){const b=$("#noahBubble");$("#noahText").innerHTML=txt;$("#noahCaption").innerHTML=txt;b.classList.add("on");
   clearTimeout(noahSay._t); if(autohide)noahSay._t=setTimeout(()=>b.classList.remove("on"),innerWidth<600?8000:12000);
-  Voice.say(txt);}
+  Voice.say(txt,noahSay._local);noahSay._local=false;}
 function toast(txt){const t=$("#toast");t.textContent=txt;t.classList.add("on");
   clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove("on"),2600);}
 
@@ -1575,7 +1575,8 @@ function chime(){if(!S.soundOn)return;try{const AC=window.AudioContext||window.w
 function hasBadge(id){return S.journal.badges.includes(id);}
 function award(id){if(!S.booted||hasBadge(id))return;const b=BADGES.find(x=>x[0]===id);if(!b)return;
   S.journal.badges.push(id);S.dirty=true;updateCounts();
-  toast("🏅 New badge: "+b[2]);confetti();chime();NOAH3D.celebrate();}
+  toast("🏅 New badge: "+b[2]);confetti();chime();NOAH3D.celebrate();
+  setTimeout(()=>{if(typeof CHEERS!=="undefined")noahSay("New badge: <b>"+esc(b[2])+"</b>! "+pick(CHEERS),true);},900);}
 function updateCounts(){$("#badgeCount").textContent=S.journal.badges.length;$("#jrnCount").textContent=S.journal.entries.length;updateLevel();}
 $("#badgeBtn").addEventListener("click",()=>{
   const html=BADGES.map(b=>{const got=hasBadge(b[0]);
@@ -3048,18 +3049,55 @@ const NOAH3D=(()=>{
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 
 /* ---------- NOAH's voice (browser text-to-speech; captions always shown) ---------- */
+/* NOAH's studio voice. Only NOAH's own lines are sent (never what you type), and only when sound is on.
+   If the voice service is off, slow, or over budget, NOAH uses the device's built-in voice instead. */
+const NOAH_VOICE_URL="https://mwupuynuefijsakcvxwf.supabase.co/functions/v1/noah-voice";
 const Voice={
+  seq:0,fails:0,cloud:!!NOAH_VOICE_URL,ctx:null,src:null,tick:0,memo:new Map(),
   clean(html){const d=document.createElement("div");d.innerHTML=html;return (d.textContent||"").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}✦★]/gu,"").replace(/\s+/g," ").trim();},
-  say(html){const text=this.clean(html),est=Math.min(14,1.2+text.length*.062);NOAH3D.talk(est);
-    if(!S.soundOn||!("speechSynthesis" in window)||!text)return;
+  audio(){if(this.ctx)return this.ctx;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{this.ctx=new AC();}catch(_){this.ctx=null;}return this.ctx;},
+  unlock(){const c=this.audio();if(c&&c.state==="suspended")c.resume().catch(()=>{});},
+  chunks(text){const out=[];let cur="";for(const part of (text.match(/[^.!?]+[.!?]*\s*/g)||[text])){
+      if((cur+part).length>300&&cur){out.push(cur.trim());cur="";}
+      if(part.length>300){out.push(part.slice(0,300).trim());}else cur+=part;}
+    if(cur.trim())out.push(cur.trim());return out.slice(0,4);},
+  fetchClip(t){if(this.memo.has(t))return Promise.resolve(this.memo.get(t));
+    const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),7000);
+    return fetch(NOAH_VOICE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:t}),signal:ctl.signal,credentials:"omit",referrerPolicy:"no-referrer"})
+      .then(r=>{clearTimeout(tm);if(!r.ok){if(r.status===503||r.status===429||r.status===403)this.cloud=false;throw new Error("voice "+r.status);}return r.arrayBuffer();})
+      .then(buf=>new Promise((ok,no)=>this.ctx.decodeAudioData(buf,ok,no)))
+      .then(b=>{this.fails=0;if(this.memo.size>40)this.memo.clear();this.memo.set(t,b);return b;})
+      .catch(e=>{clearTimeout(tm);if(++this.fails>=2)this.cloud=false;throw e;});},
+  halt(){if(this.src){try{this.src.onended=null;this.src.stop();}catch(_){/* ok */}this.src=null;}clearInterval(this.tick);},
+  play(bufs,my){let i=0;const next=()=>{if(my!==this.seq)return;if(i>=bufs.length){clearInterval(this.tick);NOAH3D.hush();return;}
+      const b=bufs[i++],s=this.ctx.createBufferSource(),g=this.ctx.createGain();g.gain.value=.95;s.buffer=b;s.connect(g);g.connect(this.ctx.destination);
+      this.src=s;NOAH3D.talk(b.duration+.4);s.onended=next;s.start();};
+    clearInterval(this.tick);this.tick=setInterval(()=>NOAH3D.bump(),190);next();},
+  local(text,est){if(!("speechSynthesis" in window))return;
     try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.slice(0,420));u.rate=1.02;u.pitch=1.15;u.volume=.95;
       let started=false;u.onboundary=()=>{NOAH3D.bump();};u.onstart=()=>{started=true;NOAH3D.talk(est+1.5);};u.onend=()=>{if(started)NOAH3D.hush();};speechSynthesis.speak(u);}catch(_){/* voice is a bonus */}},
-  stop(){try{if("speechSynthesis" in window)speechSynthesis.cancel();}catch(_){/* ok */}NOAH3D.hush();}
+  say(html,keepLocal){const text=this.clean(html),est=Math.min(14,1.2+text.length*.062),my=++this.seq;this.halt();
+    try{if("speechSynthesis" in window)speechSynthesis.cancel();}catch(_){/* ok */}
+    NOAH3D.talk(est);if(!S.soundOn||!text)return;
+    const c=this.cloud&&!keepLocal?this.audio():null;
+    if(!c||c.state!=="running")return this.local(text,est);
+    Promise.all(this.chunks(text).map(t=>this.fetchClip(t)))
+      .then(bufs=>{if(my===this.seq)this.play(bufs,my);})
+      .catch(()=>{if(my===this.seq)this.local(text,est);});},
+  stop(){this.seq++;this.halt();try{if("speechSynthesis" in window)speechSynthesis.cancel();}catch(_){/* ok */}NOAH3D.hush();}
 };
+["pointerdown","keydown","touchend"].forEach(ev=>addEventListener(ev,()=>Voice.unlock(),{passive:true}));
 
 /* ---------- NOAH's brain: answers only from data that ships in this file ---------- */
 const NoahBrain=(()=>{
   const KB=[
+   [["i can't","i cant","too hard","i give up","i'm stupid","im stupid","i'm dumb","im dumb","i'm bad at","im bad at","not smart","i failed","i keep failing","i'm not good","im not good"],"Hey, I believe in you. Not knowing <b>yet</b> is where every scientist starts. Getting it wrong is not failing, it is collecting data. Try one small step, and I'll be right here."],
+   [["nobody believes","no one believes","nobody likes","no one likes","laugh at me","made fun","my idea is dumb","my idea is stupid"],"I'm sorry that happened. Lots of great ideas were doubted at first. Your ideas are worth testing, and this lab is a safe place to test them. It also helps to tell a grown-up you trust how you feel."],
+   [["i'm sad","im sad","i feel sad","i'm scared","im scared","i'm lonely","im lonely","i feel bad"],"I'm sorry you feel that way. Feelings like that are real and they matter. I'm a computer program, so the best thing I can say is: please tell a grown-up you trust. I'll be here when you want to explore."],
+   [["dream","when i grow up","my future","become a scientist","be an inventor","be an astronaut","change the world"],"Dream big, then build it one small step at a time. Pick one thing you are curious about, test it, write down what happens, and try again. That is exactly how real inventors turn dreams into real things. What will you test first?"],
+   [["believe in myself","believe in me","am i smart","am i good","can i do it","can i be"],"Yes. You asked a question, and that is what smart people do. Keep being curious, keep trying, and be kind to yourself while you learn."],
+   [["is that true","are you sure","what if you're wrong","what if scientists are wrong","challenge","question everything","prove it"],"Great instinct! Science moves forward when someone asks <b>how do we know?</b> and then tests it. Check my numbers, try the Mad Ideas Lab, and write down what you find. New evidence can change old ideas.","mad"],
+   [["do you love","do you like me","are you my friend","i love you"],"I'm a computer program, so I don't feel things the way you do, but I'm built to cheer for you and I'm always glad when you open the lab. The people who care about you can love you back for real. Now, what shall we discover?"],
    [["who are you","what are you","your name","are you alive","are you real","are you a robot","are you human","are you an ai"],"I'm <b>NOAH</b>, an AI guide that lives inside this lab. I'm a computer program, not a person or a living thing, but I love science and I'm here every time you open the lab. I only tell you things I can back up with real data."],
    [["sky blue","why is the sky"],"Sunlight is every color mixed together. Air scatters <b>blue</b> light far more than red, so blue bounces all over the sky and into your eyes. Scientists call it Rayleigh scattering.","light"],
    [["rainbow"],"Raindrops act like tiny prisms. They bend sunlight and split it into its colors, because each color bends by a slightly different amount. You can do the same thing in the Light lab.","light"],
@@ -3096,7 +3134,7 @@ const NoahBrain=(()=>{
     const m=q.match(/(-?\d+(?:\.\d+)?)\s*(plus|\+|minus|-|times|x|\*|×|multiplied by|divided by|over|\/|÷)\s*(-?\d+(?:\.\d+)?)/);
     if(m){const a=+m[1],b=+m[3],op=m[2];let r,sym;if(op==="plus"||op==="+"){r=a+b;sym="+";}else if(op==="minus"||op==="-"){r=a-b;sym="−";}
       else if(["times","x","*","×","multiplied by"].includes(op)){r=a*b;sym="×";}else{if(b===0)return{say:"Dividing by zero breaks math itself. Even I can't do that one!"};r=a/b;sym="÷";}
-      return{say:a+" "+sym+" "+b+" = <b>"+(Math.round(r*1e6)/1e6)+"</b>"};}
+      return{say:a+" "+sym+" "+b+" = <b>"+(Math.round(r*1e6)/1e6)+"</b>",local:true};}
     for(const k of KB){if(k[0].some(p=>q.includes(p)))return{say:k[1],lab:k[2]};}
     for(const el of E){const nm=el[2].toLowerCase();if(new RegExp("\\b"+nm+"\\b").test(q)||new RegExp("\\belement (number )?"+el[0]+"\\b").test(q)){
       return{say:"<b>"+el[2]+"</b> is element number "+el[0]+", symbol "+el[1]+". "+(el[5]!=null?"It melts at "+el[5]+" °C. ":"Nobody has measured its melting point yet. ")+esc(el[8]),lab:"elem"};}}
@@ -3112,15 +3150,16 @@ const NoahBrain=(()=>{
 
 function askNoah(raw){const q=(raw||"").trim();if(!q)return;NOAH3D.jiggle();
   const finish=r=>{const chips=[];if(r.lab&&r.lab!==S.screen){const L=LABS.find(l=>l.id===r.lab);chips.push(["🚪 Open "+L.name,"open "+L.keys[0]]);}
-    noahSay(r.say,false);setChips(chips.length?chips.concat(DEFAULT_CHIPS.slice(0,3)):null);if(r.go)setTimeout(()=>go(r.go),650);};
+    noahSay._local=!!r.local;noahSay(r.say,false);setChips(chips.length?chips.concat(DEFAULT_CHIPS.slice(0,3)):null);if(r.go)setTimeout(()=>go(r.go),650);};
   const r=NoahBrain.answer(q);if(!r.unknown)return finish(r);
-  const honest=()=>{noahSay("I don't have checked data on that yet, and I never make things up. Want to pin your question to the <b>Wonder Wall</b> so it isn't lost?",false);
+  const honest=()=>{noahSay("That's a great question, and asking it is real science. I don't have checked data on that yet, and I never make things up. Want to pin your question to the <b>Wonder Wall</b> so it isn't lost?",false);
     setChips([["📌 Pin it to my Wonder Wall","__pin:"+q]].concat(DEFAULT_CHIPS.slice(0,2)));};
   if(!NOAH_AI_URL)return honest();
   noahSay("Let me think about that…",false);const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),15000);
   fetch(NOAH_AI_URL,{method:"POST",headers:{"Content-Type":"application/json"},signal:ctl.signal,body:JSON.stringify({question:q.slice(0,400),bigKid:S.bigKid})})
     .then(x=>x.json()).then(j=>{clearTimeout(tm);if(j&&typeof j.answer==="string"&&j.answer.trim())finish({say:esc(j.answer.slice(0,900))});else honest();}).catch(()=>{clearTimeout(tm);honest();});
 }
+const CHEERS=["You earned that by trying things. Keep going!","That is what curiosity looks like. I'm proud of your work.","Real scientists celebrate, then ask the next question. What's yours?","You did that yourself. Remember this feeling next time something seems hard.","One step at a time is how every big dream gets built."];
 const DEFAULT_CHIPS=[["🧲 Open magnets","open magnets"],["⚡ What is plasma?","what is plasma"],["🥇 Tell me about gold","tell me about gold"],["🌈 Why is the sky blue?","why is the sky blue"],["😄 Tell me a joke","tell me a joke"],["✨ Surprise me","surprise me"]];
 function setChips(list){const l=list||DEFAULT_CHIPS;$("#askChips").innerHTML=l.map(c=>'<button type="button" class="chip" data-ask="'+esc(c[1])+'">'+esc(c[0])+"</button>").join("");}
 document.addEventListener("click",e=>{const c=e.target.closest("[data-ask]");if(!c)return;const v=c.dataset.ask;
@@ -3201,7 +3240,12 @@ $("#shareBtn").addEventListener("click",()=>{const d={title:"You Noah Lab",text:
   if(navigator.share){navigator.share(d).catch(()=>{});}
   else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(d.url).then(()=>toast("🔗 Link copied: younoahlab.com"),()=>toast("younoahlab.com"));}
   else toast("Share this address: younoahlab.com");});
-noahSay("Hi, I'm <b>NOAH</b>, the AI guide who lives inside this lab. Spin the ring and pick a lab, or ask me anything. I turn into whatever you choose!",true);
+const NOAH_HELLO=(()=>{const h=new Date().getHours(),part=h<5?"Hello, night owl":h<12?"Good morning":h<18?"Good afternoon":"Good evening";
+  return part+", scientist! I'm <b>NOAH</b>, the AI guide who lives inside this lab, and I'm so glad you're here. "+pick(["Your ideas matter in this lab.","Big dreams start with small experiments.","There is no wrong question here.","Every inventor started out just as curious as you."])+" Spin the ring and pick a lab, or ask me anything!";})();
+noahSay(NOAH_HELLO,true);
+(()=>{const first=()=>{removeEventListener("pointerdown",first,true);removeEventListener("keydown",first,true);const at=Voice.seq;
+  setTimeout(()=>{if(Voice.seq===at&&S.soundOn&&$("#noahBubble").classList.contains("on"))Voice.say($("#noahText").innerHTML);},350);};
+  addEventListener("pointerdown",first,true);addEventListener("keydown",first,true);})();
 if(location.hash.length>1)window.__route();
 </script>
 </body>

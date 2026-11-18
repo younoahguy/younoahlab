@@ -1,0 +1,28 @@
+# You Noah Lab
+
+> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 13 hands-on virtual labs and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
+
+Key facts:
+- Free to use. No ads, no trackers, no account needed.
+- Everything is virtual. Real-world experiments need a grown-up.
+- NOAH answers only from data that ships with the page. If NOAH has no checked data for a question, it says so.
+- Made by You Noah Guy.
+
+## Labs
+- [Element Explorer](https://younoahlab.com/#elem): All 118 elements, real data, trading cards
+- [Sound Studio](https://younoahlab.com/#sound): Make REAL sound waves you can hear
+- [Circuits](https://younoahlab.com/#circ): Build circuits with live V = I × R
+- [Chemistry Bench](https://younoahlab.com/#chem): Mix real reactions: fizz, foam and flame tests
+- [Light & Optics](https://younoahlab.com/#light): Bend light with a prism using real Snell's law
+- [Matter & Plasma](https://younoahlab.com/#matter): Heat atoms from frozen solid all the way to plasma
+- [Magnet Lab](https://younoahlab.com/#magnet): Field lines, a compass and electromagnets
+- [Crystals & Metals](https://younoahlab.com/#crystal): Grow crystals, test and mix real metals
+- [DNA & Genetics](https://younoahlab.com/#dna): Build proteins and breed creatures for real
+- [Human Body](https://younoahlab.com/#body): Test YOUR real reaction time and more
+- [Nature](https://younoahlab.com/#nature): Food webs, photosynthesis and growing plants
+- [Mad Ideas Lab](https://younoahlab.com/#mad): Challenge the laws of physics!
+- [Lab Journal](https://younoahlab.com/#jrnl): Your findings, reports and certificate
+
+## More
+- [Privacy](https://younoahlab.com/privacy.html)
+- [Sitemap](https://younoahlab.com/sitemap.xml)
