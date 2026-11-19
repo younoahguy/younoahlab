@@ -4,6 +4,17 @@
 
 ![NOAH on the You Noah Lab home screen](og-image.png)
 
+[![CI](https://github.com/younoahguy/younoahlab/actions/workflows/ci.yml/badge.svg)](https://github.com/younoahguy/younoahlab/actions/workflows/ci.yml)
+
+## At a glance (for reviewers)
+
+| | |
+|---|---|
+| **What it shows** | A dependency-free WebGL renderer, physics simulations checked against textbook formulas, accessible and private-by-default design for children (no cookies, storage or trackers), and static SEO pages |
+| **Stack** | Plain HTML, CSS and JavaScript · raw WebGL with a 2D canvas fallback · GitHub Pages |
+| **Verified in this repo** | CI runs `node --test tests/*.test.mjs`: every page has a language, title and description; canonical URLs match paths; internal links and assets resolve; the sitemap covers every article; no trackers or cookie writes; the web manifest is valid |
+| **How it was built** | Concept, curriculum and acceptance by Noah Schaa; code written with AI coding agents (Claude) under his direction |
+
 ## What it is
 
 - **22 labs and tools:** elements (with a 3D atom for all 118), sound, circuits, chemistry, light, states of matter, magnets, crystals and metals, DNA (with a 3D double helix), the human body, nature, a "Mad Ideas" physics lab, a lab journal, plus:
@@ -29,10 +40,12 @@
 
 ## Testing
 
-Each release is checked by an automated browser run: all 23 screens on five device sizes, the main user journeys, deep links, and the no-WebGL fallback. The Free Roam World has its own run that compares every measured throw, drop, float, echo and solar reading with the textbook formula.
+This repository's CI runs static checks on every push (`node --test tests/*.test.mjs`, no dependencies): page metadata, canonical URLs, internal links and assets, sitemap coverage, the no-tracker rule and the web manifest.
+
+Releases have also been checked with an automated browser run (all 23 screens on five device sizes, the main user journeys, deep links, the no-WebGL fallback, and a Free Roam run that compares measured throws, drops, floats, echoes and solar readings with the textbook formulas). That browser harness is not yet committed to this repository.
 
 ## Privacy
 
 See [privacy.html](privacy.html).
 
-© You Noah Guy. All rights reserved.
+© You Noah Guy. All rights reserved; source shown for review only. See [`LICENSE`](LICENSE).
