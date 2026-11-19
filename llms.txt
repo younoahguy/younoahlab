@@ -1,6 +1,6 @@
 # You Noah Lab
 
-> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 21 hands-on virtual labs and tools and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
+> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 22 hands-on virtual labs and tools, including a first-person Free Roam World, and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
 
 Key facts:
 - Free to use. No ads, no trackers, no account needed.
@@ -9,6 +9,7 @@ Key facts:
 - Made by You Noah Guy.
 
 ## Labs
+- [Free Roam World](https://younoahlab.com/#world): Walk, throw, build and test real physics
 - [Element Explorer](https://younoahlab.com/#elem): All 118 elements, real data, trading cards
 - [Sound Studio](https://younoahlab.com/#sound): Make REAL sound waves you can hear
 - [Circuits](https://younoahlab.com/#circ): Build circuits with live V = I × R

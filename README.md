@@ -6,7 +6,8 @@
 
 ## What it is
 
-- **21 labs and tools:** elements (with a 3D atom for all 118), sound, circuits, chemistry, light, states of matter, magnets, crystals and metals, DNA (with a 3D double helix), the human body, nature, a "Mad Ideas" physics lab, a lab journal, plus:
+- **22 labs and tools:** elements (with a 3D atom for all 118), sound, circuits, chemistry, light, states of matter, magnets, crystals and metals, DNA (with a 3D double helix), the human body, nature, a "Mad Ideas" physics lab, a lab journal, plus:
+  - **Free Roam World:** a first-person field site. Throws and drops follow Newton's laws (checked live against the range and fall-time formulas), floating follows Archimedes' principle with real densities, echoes use the speed of sound, and a solar panel follows the Sun. Gravity can be switched to the Moon, Mars or Jupiter. NOAH builds 21 kinds of object on request, in any size, color or material, and says so plainly when asked for something he cannot build.
   - **Molecule Lab 3D:** 15 molecules and crystals built from measured bond lengths and angles, with tap-to-measure distances and angles.
   - **Space & Gravity:** a 3D solar system driven by real orbital periods, a true-size comparison and a weight-on-other-worlds calculator.
   - **Motion & Forces:** a 3D launcher that integrates Newton's laws, with optional air drag; the no-air result matches the textbook formula.
@@ -15,20 +16,20 @@
   - **AI & Agents Lab:** a scripted agent simulator for tools, memory, fact-checking, step limits and human approval; a prompt workshop; and a real perceptron you can train.
   - **Quantum Lab:** the double-slit experiment sampled from the real intensity formula, a qubit on a 3D Bloch sphere with H, X, Z and S gates, and a two-qubit entanglement circuit.
   - **How It Works:** a 64-page library with five ways to learn each page (read, step map, listen, do, quiz), also published as static pages under `/how/` for search engines.
-- **R3D:** a small lit 3D renderer written on raw WebGL for this project (spheres, cylinders, discs, procedural planet surfaces, orbit camera, picking), with a 2D canvas fallback. No libraries.
+- **R3D:** a small lit 3D renderer written on raw WebGL for this project (spheres, cylinders, discs, boxes, procedural surfaces, orbit and first-person cameras, distance haze, picking), with a 2D canvas fallback. No libraries.
 - **Real science:** results are calculated live from standard equations and published reference values. Where a simulation is simplified, the lab says so.
 - **NOAH:** watches the pointer, talks, and reshapes himself into the lab you pick. His built-in answers come only from data that ships with the page, and he says so when he does not know something.
 
 ## How it is built
 
-- One self-contained `index.html`: no frameworks, no build step, no external requests.
+- One self-contained `index.html`: no frameworks and no libraries. The only network calls are optional: NOAH's studio voice for his own fixed lines, and live AI answers that stay off unless a grown-up turns them on. Both go through small server functions that hold the keys.
 - NOAH is rendered with raw WebGL and falls back to 2D canvas on devices without 3D.
 - No cookies, no browser storage, no trackers. A journal is saved only as a file on the user's device.
 - A calm mode, and automatic support for reduced-motion settings.
 
 ## Testing
 
-Each release is checked by an automated browser run: all 14 screens on five device sizes, the main user journeys, deep links, and the no-WebGL fallback.
+Each release is checked by an automated browser run: all 23 screens on five device sizes, the main user journeys, deep links, and the no-WebGL fallback. The Free Roam World has its own run that compares every measured throw, drop, float, echo and solar reading with the textbook formula.
 
 ## Privacy
 
