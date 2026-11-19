@@ -1,6 +1,6 @@
 # You Noah Lab
 
-> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 18 hands-on virtual labs and tools and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
+> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 21 hands-on virtual labs and tools and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
 
 Key facts:
 - Free to use. No ads, no trackers, no account needed.
@@ -24,12 +24,15 @@ Key facts:
 - [Molecule Lab 3D](https://younoahlab.com/#mol): Spin real molecules and measure their bonds
 - [Space & Gravity](https://younoahlab.com/#space): Fly the solar system with real orbits
 - [Motion & Forces](https://younoahlab.com/#motion): Launch, aim and hit targets with real physics
+- [Robot Lab 3D](https://younoahlab.com/#robot): Build a robot and program it with blocks
+- [AI & Agents Lab](https://younoahlab.com/#agents): Design an AI agent, write prompts, train a machine
+- [Quantum Lab](https://younoahlab.com/#quantum): Double slits, qubits and entanglement
 - [Science Toolbox](https://younoahlab.com/#tools): Convert units, time things, zoom the universe
-- [How It Works](https://younoahlab.com/#how): 48 big questions, answered step by step
+- [How It Works](https://younoahlab.com/#how): 64 big questions, five ways to learn each
 - [Lab Journal](https://younoahlab.com/#jrnl): Your findings, reports and certificate
 
 ## How It Works library
-- [All 48 questions](https://younoahlab.com/how/)
+- [All 64 questions](https://younoahlab.com/how/)
 - [What is an atom?](https://younoahlab.com/how/what-is-an-atom.html)
 - [Why are some things solid, liquid or gas?](https://younoahlab.com/how/states-of-matter.html)
 - [Why does ice float?](https://younoahlab.com/how/why-does-ice-float.html)
@@ -78,6 +81,22 @@ Key facts:
 - [How does AI work, and what is NOAH?](https://younoahlab.com/how/how-does-ai-work.html)
 - [How do touchscreens work?](https://younoahlab.com/how/how-do-touchscreens-work.html)
 - [How do solar panels work?](https://younoahlab.com/how/how-do-solar-panels-work.html)
+- [How do robots work?](https://younoahlab.com/how/how-do-robots-work.html)
+- [What is an algorithm?](https://younoahlab.com/how/what-is-an-algorithm.html)
+- [What is machine learning?](https://younoahlab.com/how/what-is-machine-learning.html)
+- [What is an AI agent?](https://younoahlab.com/how/what-is-an-ai-agent.html)
+- [How do AI agents use tools and work in teams?](https://younoahlab.com/how/how-do-ai-agents-use-tools.html)
+- [How do you write a good prompt?](https://younoahlab.com/how/how-to-write-a-good-prompt.html)
+- [Why does AI sometimes get things wrong?](https://younoahlab.com/how/why-does-ai-make-mistakes.html)
+- [How do people keep AI safe?](https://younoahlab.com/how/how-do-we-keep-ai-safe.html)
+- [What is superintelligence?](https://younoahlab.com/how/what-is-superintelligence.html)
+- [How do self-driving cars see the road?](https://younoahlab.com/how/how-do-self-driving-cars-see.html)
+- [What is quantum physics?](https://younoahlab.com/how/what-is-quantum-physics.html)
+- [What is the double-slit experiment?](https://younoahlab.com/how/what-is-the-double-slit-experiment.html)
+- [What is superposition?](https://younoahlab.com/how/what-is-superposition.html)
+- [What is quantum entanglement?](https://younoahlab.com/how/what-is-entanglement.html)
+- [How do quantum computers work?](https://younoahlab.com/how/how-do-quantum-computers-work.html)
+- [Is light a wave or a particle?](https://younoahlab.com/how/is-light-a-wave-or-a-particle.html)
 
 ## More
 - [Privacy](https://younoahlab.com/privacy.html)
