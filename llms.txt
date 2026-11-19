@@ -1,6 +1,6 @@
 # You Noah Lab
 
-> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 13 hands-on virtual labs and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
+> You Noah Lab (https://younoahlab.com) is a free interactive science lab for kids aged about 7 to 13. It runs in any web browser, with 18 hands-on virtual labs and tools and NOAH, an AI guide (a computer program, not a person) who opens labs and answers science questions from checked reference data.
 
 Key facts:
 - Free to use. No ads, no trackers, no account needed.
@@ -21,7 +21,63 @@ Key facts:
 - [Human Body](https://younoahlab.com/#body): Test YOUR real reaction time and more
 - [Nature](https://younoahlab.com/#nature): Food webs, photosynthesis and growing plants
 - [Mad Ideas Lab](https://younoahlab.com/#mad): Challenge the laws of physics!
+- [Molecule Lab 3D](https://younoahlab.com/#mol): Spin real molecules and measure their bonds
+- [Space & Gravity](https://younoahlab.com/#space): Fly the solar system with real orbits
+- [Motion & Forces](https://younoahlab.com/#motion): Launch, aim and hit targets with real physics
+- [Science Toolbox](https://younoahlab.com/#tools): Convert units, time things, zoom the universe
+- [How It Works](https://younoahlab.com/#how): 48 big questions, answered step by step
 - [Lab Journal](https://younoahlab.com/#jrnl): Your findings, reports and certificate
+
+## How It Works library
+- [All 48 questions](https://younoahlab.com/how/)
+- [What is an atom?](https://younoahlab.com/how/what-is-an-atom.html)
+- [Why are some things solid, liquid or gas?](https://younoahlab.com/how/states-of-matter.html)
+- [Why does ice float?](https://younoahlab.com/how/why-does-ice-float.html)
+- [What is fire?](https://younoahlab.com/how/what-is-fire.html)
+- [Why does metal rust?](https://younoahlab.com/how/why-does-metal-rust.html)
+- [How does soap clean?](https://younoahlab.com/how/how-does-soap-work.html)
+- [How does gravity work?](https://younoahlab.com/how/how-does-gravity-work.html)
+- [Why do some things float and others sink?](https://younoahlab.com/how/why-do-things-float.html)
+- [How do airplanes fly?](https://younoahlab.com/how/how-do-airplanes-fly.html)
+- [How do rockets work?](https://younoahlab.com/how/how-do-rockets-work.html)
+- [What is friction?](https://younoahlab.com/how/what-is-friction.html)
+- [Why does a thrown ball curve back down?](https://younoahlab.com/how/how-does-a-thrown-ball-move.html)
+- [How does electricity work?](https://younoahlab.com/how/how-does-electricity-work.html)
+- [How do batteries work?](https://younoahlab.com/how/how-do-batteries-work.html)
+- [How do magnets work?](https://younoahlab.com/how/how-do-magnets-work.html)
+- [How do electric motors work?](https://younoahlab.com/how/how-do-electric-motors-work.html)
+- [What is lightning?](https://younoahlab.com/how/what-is-lightning.html)
+- [How do light bulbs work?](https://younoahlab.com/how/how-do-light-bulbs-work.html)
+- [Why is the sky blue?](https://younoahlab.com/how/why-is-the-sky-blue.html)
+- [How do rainbows form?](https://younoahlab.com/how/how-do-rainbows-form.html)
+- [How do we see color?](https://younoahlab.com/how/how-do-we-see-color.html)
+- [How does sound travel?](https://younoahlab.com/how/how-does-sound-travel.html)
+- [How do glasses and lenses work?](https://younoahlab.com/how/how-do-lenses-work.html)
+- [What is an echo?](https://younoahlab.com/how/what-is-an-echo.html)
+- [Why do we have seasons?](https://younoahlab.com/how/why-do-we-have-seasons.html)
+- [How does rain form?](https://younoahlab.com/how/how-does-rain-form.html)
+- [How do volcanoes erupt?](https://younoahlab.com/how/how-do-volcanoes-erupt.html)
+- [What causes earthquakes?](https://younoahlab.com/how/what-causes-earthquakes.html)
+- [Why is the ocean salty?](https://younoahlab.com/how/why-is-the-ocean-salty.html)
+- [What causes tides?](https://younoahlab.com/how/what-causes-tides.html)
+- [Why does the Moon change shape?](https://younoahlab.com/how/why-does-the-moon-change-shape.html)
+- [How does the Sun shine?](https://younoahlab.com/how/how-does-the-sun-shine.html)
+- [What is a black hole?](https://younoahlab.com/how/what-is-a-black-hole.html)
+- [Why do planets go around the Sun?](https://younoahlab.com/how/why-do-planets-orbit.html)
+- [What is a star?](https://younoahlab.com/how/what-is-a-star.html)
+- [Why do we have day and night?](https://younoahlab.com/how/why-is-there-day-and-night.html)
+- [What is DNA?](https://younoahlab.com/how/what-is-dna.html)
+- [What is a cell?](https://younoahlab.com/how/what-is-a-cell.html)
+- [How do plants make their own food?](https://younoahlab.com/how/how-do-plants-make-food.html)
+- [How does the heart work?](https://younoahlab.com/how/how-does-the-heart-work.html)
+- [How do we breathe?](https://younoahlab.com/how/how-do-we-breathe.html)
+- [How does your body fight germs?](https://younoahlab.com/how/how-does-the-body-fight-germs.html)
+- [How do computers work?](https://younoahlab.com/how/how-do-computers-work.html)
+- [How does the internet work?](https://younoahlab.com/how/how-does-the-internet-work.html)
+- [How does GPS know where you are?](https://younoahlab.com/how/how-does-gps-work.html)
+- [How does AI work, and what is NOAH?](https://younoahlab.com/how/how-does-ai-work.html)
+- [How do touchscreens work?](https://younoahlab.com/how/how-do-touchscreens-work.html)
+- [How do solar panels work?](https://younoahlab.com/how/how-do-solar-panels-work.html)
 
 ## More
 - [Privacy](https://younoahlab.com/privacy.html)

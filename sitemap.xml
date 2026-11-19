@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://younoahlab.com/</loc><lastmod>2026-11-18</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://younoahlab.com/how/</loc><lastmod>2026-11-18</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-an-atom.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/states-of-matter.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-does-ice-float.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-fire.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-does-metal-rust.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-soap-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-gravity-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-do-things-float.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-airplanes-fly.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-rockets-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-friction.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-a-thrown-ball-move.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-electricity-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-batteries-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-magnets-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-electric-motors-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-lightning.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-light-bulbs-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-is-the-sky-blue.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-rainbows-form.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-we-see-color.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-sound-travel.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-lenses-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-an-echo.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-do-we-have-seasons.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-rain-form.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-volcanoes-erupt.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-causes-earthquakes.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-is-the-ocean-salty.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-causes-tides.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-does-the-moon-change-shape.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-the-sun-shine.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-a-black-hole.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-do-planets-orbit.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-a-star.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/why-is-there-day-and-night.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-dna.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/what-is-a-cell.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-plants-make-food.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-the-heart-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-we-breathe.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-the-body-fight-germs.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-computers-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-the-internet-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-gps-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-does-ai-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-touchscreens-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://younoahlab.com/how/how-do-solar-panels-work.html</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
   <url><loc>https://younoahlab.com/privacy.html</loc><lastmod>2026-11-18</lastmod><priority>0.3</priority></url>
   <url><loc>https://younoahlab.com/llms.txt</loc><lastmod>2026-11-18</lastmod><priority>0.2</priority></url>
 </urlset>
