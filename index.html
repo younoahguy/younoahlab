@@ -4652,7 +4652,7 @@ const WorldLab=(()=>{
   function hud(force){const now=tm();if(!force&&now-tHud<.2)return;tHud=now;let st=null;for(const s of ST)if(Math.hypot(P.x-s.x,P.z-s.z)<s.r&&(s.id!=="wall"||P.z>12)){st=s;break;}
     if(st&&st.id!==cur){cur=st.id;if(!seen.has(st.id)){seen.add(st.id);noahSay(st.tip,true);if(ST.every(s=>seen.has(s.id)))award("world_explorer");}}if(!st)cur="";
     posts.forEach(t=>{t.hide=Math.hypot(P.x-1.95,P.z-t.z)>17;});const deg=Math.round(-sc.cam.pitch*180/Math.PI),pw=$("#wdPower").value;
-    $("#wdHud").innerHTML=esc(st?st.name:"🌍 Open field")+(P.up?" · "+TOWER.h+" m up":"")+"<small>"+world+" g "+g+" · aim "+Math.abs(deg)+"° "+(deg>0?"up":deg<0?"down":"level")+" · throw "+pw+" m/s</small>";
+    $("#wdHud").innerHTML=esc(st?st.name:"🌍 Open field")+(P.up?" · "+TOWER.h+" m up":"")+"<small>"+world+" g "+g+" · aim "+Math.abs(deg)+"° "+(deg>0?"up":deg<0?"down":"level")+"</small>";$("#wdThrow").textContent="🎯 Throw "+pw+" m/s";
     const nearT=Math.hypot(P.x-TOWER.x,P.z-TOWER.z)<5.5||P.up>0;$("#wdClimb").hidden=!nearT;$("#wdClimb").textContent=P.up?"🪜 Down":"🪜 Climb";$("#wdGrab").textContent=held?"✋ Holding":"🤚 Grab";
     const t=aim,box=$("#wdTarget");if(held){box.hidden=false;box.innerHTML="<b>Holding: "+nameOf(held)+"</b><br>mass "+kg(held.mass)+" kg · weighs "+f8(held.mass*g,held.mass*g<10?1:0)+" N on "+where();}
     else if(t&&t.ob){box.hidden=false;box.innerHTML="<b>"+nameOf(t)+"</b><br>mass "+kg(t.mass)+" kg · weighs "+f8(t.mass*g,t.mass*g<10?1:0)+" N here<br>density "+f8(t.rho,0)+" kg/m³ · "+f8(Math.hypot(t.ob.p[0]-P.x,t.ob.p[2]-P.z),1)+" m away";}
