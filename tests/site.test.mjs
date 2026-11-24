@@ -72,3 +72,14 @@ test("web app manifest is valid JSON with the required fields", () => {
   for (const k of ["name", "start_url", "icons"]) assert.ok(m[k], `manifest missing ${k}`);
   for (const icon of m.icons) assert.ok(existsSync(join(root, icon.src.replace(/^\//, ""))), `icon missing: ${icon.src}`);
 });
+
+test("phone layout only shortens the header switch, not the switches inside labs", () => {
+  const html = read("index.html");
+  assert.doesNotMatch(html, /(?<!header )\.switch span\{font-size:0\}/, "an unscoped .switch rule hides every lab toggle label on phones");
+});
+
+test("home page has a Help button and links to the privacy page", () => {
+  const html = read("index.html");
+  assert.match(html, /id="helpBtn"/, "no Help button in the header");
+  assert.match(html, /href="privacy\.html"/, "home page does not link to privacy.html");
+});

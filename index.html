@@ -586,7 +586,8 @@ body.at-home:not(.noah-docked) #noahBubble{display:none!important}
 @media (max-width:560px){
   header{gap:6px; padding:7px 8px}
   .hbtn,.switch{font-size:12px; padding:6px 9px}
-  .switch span{font-size:0}.switch span::before{content:'🧠'; font-size:14px}
+  header .switch span{font-size:0}header .switch span::before{content:'🧠'; font-size:14px}
+  .hbtn,header .switch{min-height:40px}
   .card{padding:16px 12px}
   .ringwrap{--pw:150px; height:268px}
   .ring3d{height:200px}
@@ -775,6 +776,7 @@ body.immersive #noahBubble{left:auto; right:8px; top:76px; bottom:auto; width:mi
     <h1 class="fun"><span class="w1">You</span> <span class="w2">Noah</span> <span class="w3">Lab</span><small><i class="dot"></i>younoahlab.com · NOAH is awake</small></h1>
   </div>
   <label class="switch" title="Big Kid Mode shows the real formulas"><input type="checkbox" id="bigkid"><span>🧠 Big Kid Mode</span></label>
+  <button class="hbtn" id="helpBtn" title="How to use the lab">❓<span class="hlabel"> Help</span></button>
   <button class="hbtn" id="navBtn" title="Jump to any lab">🧭<span class="hlabel"> Labs</span></button>
   <button class="hbtn" id="calmTog" aria-pressed="false" title="Calm mode: less motion, simple layout">🌙</button>
   <button class="hbtn" id="sndTog" aria-pressed="true" title="Sound on/off">🔊</button>
@@ -850,7 +852,7 @@ body.immersive #noahBubble{left:auto; right:8px; top:76px; bottom:auto; width:mi
     <details><summary>What devices does it work on?</summary><p>Phones, tablets, Chromebooks and computers with a modern web browser. Nothing needs to be installed.</p></details>
     <div class="row" style="margin-top:14px"><button type="button" class="btn primary" id="shareBtn">🔗 Share the lab</button><span class="note">younoahlab.com</span></div>
   </div>
-  <p class="note footnote" style="text-align:center"><b>younoahlab.com</b> · by You Noah Guy · No ads · No account needed · No tracking · Data from real science references (NIST, IUPAC, NASA, NIH &amp; friends) · Everything here is virtual, and real experiments need a grown-up! 🥽</p>
+  <p class="note footnote" style="text-align:center"><b>younoahlab.com</b> · by You Noah Guy · No ads · No account needed · No tracking · Data from real science references (NIST, IUPAC, NASA, NIH &amp; friends) · Everything here is virtual, and real experiments need a grown-up! 🥽 · <a href="privacy.html" style="color:inherit;text-decoration:underline">Privacy</a></p>
 </section>
 
 <!-- ============ ELEMENT EXPLORER ============ -->
@@ -2095,6 +2097,21 @@ function toast(txt){const t=$("#toast");t.textContent=txt;t.classList.add("on");
 /* ---- modal ---- */
 function openModal(title,html){$("#modalTitle").innerHTML=title;$("#modalBody").innerHTML=html;$("#modal").classList.add("on");$("#modalClose").focus();}
 function closeModal(){$("#modal").classList.remove("on");}
+function openHelp(){openModal("❓ How to use You Noah Lab",
+ '<h3 style="margin:4px 0 6px">For kids: 3 easy steps</h3>'+
+ '<ol style="padding-left:22px;line-height:1.6;margin:0 0 10px"><li><b>Pick a lab.</b> Tap a big picture in the ring, or tap 🧭 <b>Labs</b> to see them all.</li>'+
+ '<li><b>Try things.</b> Tap, drag and slide. Nothing can break, so test your ideas!</li>'+
+ '<li><b>Ask NOAH.</b> Type a question, or tap a bubble under the box. Say <b>open magnets</b> to jump to a lab.</li></ol>'+
+ '<p class="note" style="margin:0 0 12px">🌍 <b>Free Roam World</b> plays like a game: walk with W A S D or the stick, drag to look, and press Throw, Drop or Build. Ask NOAH things like <b>give me 3 big gold balls</b>.</p>'+
+ '<h3 style="margin:4px 0 6px">The buttons at the top</h3>'+
+ '<ul style="padding-left:22px;line-height:1.6;margin:0 0 12px"><li>🧠 <b>Big Kid Mode</b> shows the real formulas.</li><li>🧭 <b>Labs</b> opens the list of all 22 labs.</li>'+
+ '<li>🌙 <b>Calm mode</b> means less motion and a simpler screen.</li><li>🔊 turns NOAH\'s voice on or off.</li>'+
+ '<li>🏅 shows the badges you have earned.</li><li>📓 <b>Journal</b> keeps your findings. You can save it as a file.</li></ul>'+
+ '<h3 style="margin:4px 0 6px">For grown-ups</h3>'+
+ '<ul style="padding-left:22px;line-height:1.6;margin:0 0 8px"><li>No account, no ads, no tracking. Progress clears when the tab closes unless you save the journal.</li>'+
+ '<li>🎙️ Talking to NOAH and 🔓 live AI answers stay off until a grown-up turns them on.</li>'+
+ '<li><a href="privacy.html">Read the privacy page</a>.</li></ul>');}
+$("#helpBtn").addEventListener("click",openHelp);
 $("#modalClose").addEventListener("click",closeModal);
 $("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
@@ -3733,6 +3750,7 @@ const NoahBrain=(()=>{
     if(/\b(badge|level|score|progress)\b/.test(q))return{say:"You have <b>"+S.journal.badges.length+"</b> of "+BADGES.length+" badges and you have explored <b>"+S.visited.size+"</b> of 22 labs. "+$("#levelNext").textContent,local:true};
     if(/\b(hi|hello|hey|yo|good morning|good afternoon|good evening)\b/.test(q))return{say:"Hello, scientist! Ask me a question, or tell me which lab to open."};
     if(/thank/.test(q))return{say:"You're welcome! Asking questions is the whole job of a scientist."};
+    if(/^(how (do|can|should) (i|we) (use|play|start)( (this|it|here|the lab|the site|the app))?|how does (this|it|the lab|the site) work|what (do|should|can) i do( here)?|where do i (start|begin)|i'?m new( here)?|new here|show me how|tutorial|instructions|how to (use|play)( this| the lab)?)$/.test(q))return{say:"Here is how the lab works! I opened the Help page for you. Tap a big picture to open a lab, or type a question to me. Tap <b>❓ Help</b> at the top any time.",help:true};
     if(/what can you do|help/.test(q))return{say:"I can open any lab for you, tell you about all 118 elements, answer science questions I have real data for, do quick math, and tell terrible science jokes. Try: <b>tell me about gold</b>."};
     return{unknown:true,q:raw};}
   return{answer};
@@ -3741,7 +3759,7 @@ const NoahBrain=(()=>{
 function askNoah(raw){const q=(raw||"").trim();if(!q)return;NOAH3D.jiggle();
   if(window.__worldCmd&&window.__worldCmd(q))return;
   const finish=r=>{const chips=[];if(r.lab&&r.lab!==S.screen){const L=LABS.find(l=>l.id===r.lab);chips.push(["🚪 Open "+L.name,"open "+L.keys[0]]);}
-    noahSay._local=!!r.local;noahSay(r.say,false);setChips(chips.length?chips.concat(DEFAULT_CHIPS.slice(0,3)):null);if(r.go)setTimeout(()=>go(r.go),650);};
+    noahSay._local=!!r.local;noahSay(r.say,false);setChips(chips.length?chips.concat(DEFAULT_CHIPS.slice(0,3)):null);if(r.go)setTimeout(()=>go(r.go),650);if(r.help)setTimeout(openHelp,650);};
   const r=NoahBrain.answer(q);if(!r.unknown)return finish(r);
   { const hw=window.__howFind&&window.__howFind(q.toLowerCase());if(hw){noahSay(esc(hw.a)+" Want the whole story? It's in my library.",false);setChips([["📖 Read: "+hw.q,"__how:"+hw.id]].concat(DEFAULT_CHIPS.slice(0,2)));return;} }
   const honest=()=>{noahSay("That's a great question, and asking it is real science. I don't have checked data on that yet, and I never make things up. Want to pin your question to the <b>Wonder Wall</b> so it isn't lost?",false);
@@ -3753,7 +3771,7 @@ function askNoah(raw){const q=(raw||"").trim();if(!q)return;NOAH3D.jiggle();
     .then(x=>x.json()).then(j=>{clearTimeout(tm);if(j&&typeof j.answer==="string"&&j.answer.trim())finish({say:esc(j.answer.slice(0,900))+' <span class="note">(live AI answer, check it like a scientist)</span>',local:true});else honest();}).catch(()=>{clearTimeout(tm);honest();});
 }
 const CHEERS=["You earned that by trying things. Keep going!","That is what curiosity looks like. I'm proud of your work.","Real scientists celebrate, then ask the next question. What's yours?","You did that yourself. Remember this feeling next time something seems hard.","One step at a time is how every big dream gets built."];
-const DEFAULT_CHIPS=[["🧲 Open magnets","open magnets"],["⚡ What is plasma?","what is plasma"],["🥇 Tell me about gold","tell me about gold"],["🌈 Why is the sky blue?","why is the sky blue"],["😄 Tell me a joke","tell me a joke"],["✨ Surprise me","surprise me"]];
+const DEFAULT_CHIPS=[["❓ New here? Show me how","show me how"],["🧲 Open magnets","open magnets"],["⚡ What is plasma?","what is plasma"],["🥇 Tell me about gold","tell me about gold"],["🌈 Why is the sky blue?","why is the sky blue"],["😄 Tell me a joke","tell me a joke"],["✨ Surprise me","surprise me"]];
 function setChips(list){const l=list||DEFAULT_CHIPS;$("#askChips").innerHTML=l.map(c=>'<button type="button" class="chip" data-ask="'+esc(c[1])+'">'+esc(c[0])+"</button>").join("");}
 document.addEventListener("click",e=>{const c=e.target.closest("[data-ask]");if(!c)return;const v=c.dataset.ask;
   if(v.startsWith("__how:")){window.__howOpen(v.slice(6));return;}
@@ -3909,7 +3927,7 @@ const R3D=(()=>{
   return{create,basisY,hex,sub,add,mul,dot,cross,len,norm};
 })();
 /* ===== v8 labs, part A: molecules, atoms and DNA in 3D ===== */
-const f8=(v,d)=>{const n=Number(v);if(!isFinite(n))return"?";return n.toLocaleString("en-US",{maximumFractionDigits:d==null?2:d,minimumFractionDigits:0});};
+const f8=(v,d)=>{const n=Number(v);if(!isFinite(n))return"?";const s=n.toLocaleString("en-US",{maximumFractionDigits:d==null?2:d,minimumFractionDigits:0});return s==="-0"?"0":s;};
 const rd8=(id,val,lab)=>{const el=$("#"+id);if(el)el.innerHTML=val+"<small>"+lab+"</small>";};
 
 /* ---------- Molecule Lab: every model is built from measured bond lengths and angles ---------- */
@@ -4815,7 +4833,7 @@ $("#shareBtn").addEventListener("click",()=>{const d={title:"You Noah Lab",text:
   else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(d.url).then(()=>toast("🔗 Link copied: younoahlab.com"),()=>toast("younoahlab.com"));}
   else toast("Share this address: younoahlab.com");});
 const NOAH_HELLO=(()=>{const h=new Date().getHours(),part=h<5?"Hello, night owl":h<12?"Good morning":h<18?"Good afternoon":"Good evening";
-  return part+", scientist! I'm <b>NOAH</b>, the AI guide who lives inside this lab, and I'm so glad you're here. "+pick(["Your ideas matter in this lab.","Big dreams start with small experiments.","There is no wrong question here.","Every inventor started out just as curious as you."])+" Spin the ring and pick a lab, or ask me anything!";})();
+  return (h<5?"Hello, night owl scientist!":part+", scientist!")+" I'm <b>NOAH</b>, the AI guide who lives inside this lab, and I'm so glad you're here. "+pick(["Your ideas matter in this lab.","Big dreams start with small experiments.","There is no wrong question here.","Every inventor started out just as curious as you."])+" Spin the ring and pick a lab, or ask me anything!";})();
 noahSay(NOAH_HELLO,true);
 (()=>{const first=()=>{removeEventListener("pointerdown",first,true);removeEventListener("keydown",first,true);const at=Voice.seq;
   setTimeout(()=>{if(Voice.seq===at&&S.soundOn&&$("#noahBubble").classList.contains("on"))Voice.say($("#noahText").innerHTML);},350);};
