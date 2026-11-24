@@ -1,7 +1,7 @@
 {
  "name": "You Noah Lab",
  "short_name": "Noah Lab",
- "description": "Meet NOAH, the AI guide who lives inside a 3D science lab for kids. 13 hands-on labs: chemistry, circuits, DNA, magnets, light and more. Real math, real data.",
+ "description": "Meet NOAH, the AI guide who lives inside a 3D science lab for kids. 22 labs and tools, including a free-roam world: robots, AI agents, chemistry, space and more. Real math, real data.",
  "start_url": "/",
  "scope": "/",
  "display": "standalone",
