@@ -27,6 +27,7 @@
   - **AI & Agents Lab:** a scripted agent simulator for tools, memory, fact-checking, step limits and human approval; a prompt workshop; and a real perceptron you can train.
   - **Quantum Lab:** the double-slit experiment sampled from the real intensity formula, a qubit on a 3D Bloch sphere with H, X, Z and S gates, and a two-qubit entanglement circuit.
   - **How It Works:** a 64-page library with five ways to learn each page (read, step map, listen, do, quiz), also published as static pages under `/how/` for search engines.
+- **Grown-up learning plan:** a parent or teacher answers a few questions (age, grade, computer experience, learning needs, interests, time) and NOAH builds a 4-week plan with matching settings. The answers never leave the device.
 - **R3D:** a small lit 3D renderer written on raw WebGL for this project (spheres, cylinders, discs, boxes, procedural surfaces, orbit and first-person cameras, distance haze, picking), with a 2D canvas fallback. No libraries.
 - **Real science:** results are calculated live from standard equations and published reference values. Where a simulation is simplified, the lab says so.
 - **NOAH:** watches the pointer, talks, and reshapes himself into the lab you pick. His built-in answers come only from data that ships with the page, and he says so when he does not know something.
