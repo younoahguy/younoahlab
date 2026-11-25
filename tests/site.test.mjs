@@ -98,3 +98,12 @@ test("grown-up features: learning plan and a parental gate before mic and live a
   assert.match(html, /parentGate\("micGate"\)/, "microphone has no parental gate");
   assert.doesNotMatch(html, /localStorage|sessionStorage|indexedDB|document\.cookie\s*=/, "the lab promises no browser storage");
 });
+
+test('in-app flag keeps the app on-device; NOAH message can be closed; Big Kid Mode has one name', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /const IN_APP=!!window\.YNL_APP;/);
+  assert.match(html, /cloud:!!NOAH_VOICE_URL&&!IN_APP/);
+  assert.match(html, /IN_APP\?\[\]:\[\["🔓 Grown-ups: live answers"/);
+  assert.match(html, /id="noahClose"/);
+  assert.match(html, /id="bigkid" aria-label="Big Kid Mode"/);
+});
