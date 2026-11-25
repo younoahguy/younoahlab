@@ -568,6 +568,7 @@ body.at-home:not(.noah-docked) #noahBtn{opacity:0; pointer-events:none; transfor
   box-shadow:0 0 40px -10px var(--glow), 0 20px 40px -10px rgba(0,0,0,.7)}
 body.at-home:not(.noah-docked) #noahBubble{display:none!important}
 #noahBubble b{color:#7CF6FF}
+#noahBubble .nclose{margin-left:auto; background:none; border:0; color:inherit; font-size:15px; line-height:1; padding:6px 8px; min-width:32px; min-height:32px; cursor:pointer; letter-spacing:0}
 #noahBubble .who{font-family:var(--font-fun); color:var(--glow); font-weight:700; letter-spacing:3px; font-size:11.5px; margin-bottom:4px; display:flex; align-items:center; gap:8px}
 #noahBubble .ask{margin-top:10px; padding:4px}
 #noahBubble .ask input{font-size:14px; padding:6px}
@@ -775,7 +776,7 @@ body.immersive #noahBubble{left:auto; right:8px; top:76px; bottom:auto; width:mi
   <div class="logo"><span class="flask" aria-hidden="true"></span>
     <h1 class="fun"><span class="w1">You</span> <span class="w2">Noah</span> <span class="w3">Lab</span><small><i class="dot"></i>younoahlab.com · NOAH is awake</small></h1>
   </div>
-  <label class="switch" title="Big Kid Mode shows the real formulas"><input type="checkbox" id="bigkid"><span>🧠 Big Kid Mode</span></label>
+  <label class="switch" title="Big Kid Mode shows the real formulas"><input type="checkbox" id="bigkid" aria-label="Big Kid Mode"><span>🧠 Big Kid Mode</span></label>
   <button class="hbtn" id="helpBtn" title="How to use the lab">❓<span class="hlabel"> Help</span></button>
   <button class="hbtn" id="navBtn" title="Jump to any lab">🧭<span class="hlabel"> Labs</span></button>
   <button class="hbtn" id="calmTog" aria-pressed="false" title="Calm mode: less motion, simple layout">🌙</button>
@@ -1811,7 +1812,7 @@ body.immersive #noahBubble{left:auto; right:8px; top:76px; bottom:auto; width:mi
 
 <!-- ============ NOAH ============ -->
 <button id="noahBtn" aria-label="Talk to Noah"></button>
-<div id="noahBubble" role="status"><div class="who"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>NOAH · AI LAB GUIDE</div><div id="noahText"></div><form class="ask" autocomplete="off"><button type="button" class="mic" aria-label="Talk to NOAH with your voice">🎙️</button><input type="text" aria-label="Ask NOAH a question" placeholder="Ask NOAH…" maxlength="200"><button type="submit" class="send" aria-label="Send to NOAH">➤</button></form></div>
+<div id="noahBubble" role="status"><div class="who"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>NOAH · AI LAB GUIDE<button type="button" class="nclose" id="noahClose" aria-label="Hide NOAH's message">✕</button></div><div id="noahText"></div><form class="ask" autocomplete="off"><button type="button" class="mic" aria-label="Talk to NOAH with your voice">🎙️</button><input type="text" aria-label="Ask NOAH a question" placeholder="Ask NOAH…" maxlength="200"><button type="submit" class="send" aria-label="Send to NOAH">➤</button></form></div>
 
 <!-- ============ MODAL / TOAST / PRINT ============ -->
 <div id="modal" role="dialog" aria-modal="true">
@@ -3488,6 +3489,8 @@ const MadLab=(()=>{
    from data that ships in this file; anything else he says he doesn't know.
    To connect a live AI later, set NOAH_AI_URL to your own secure server endpoint
    (never put an API key in this file). */
+/* The You Noah Lab iPhone app sets window.YNL_APP before the page loads: it keeps everything on the device (no studio voice, no live AI answers). */
+const IN_APP=!!window.YNL_APP;
 const NOAH_AI_URL="https://mwupuynuefijsakcvxwf.supabase.co/functions/v1/noah-ask";
 const CALM=()=>document.body.classList.contains("calm")||!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
 const LABS=[
@@ -3667,7 +3670,7 @@ const pick=a=>a[Math.floor(Math.random()*a.length)];
    If the voice service is off, slow, or over budget, NOAH uses the device's built-in voice instead. */
 const NOAH_VOICE_URL="https://mwupuynuefijsakcvxwf.supabase.co/functions/v1/noah-voice";
 const Voice={
-  seq:0,fails:0,cloud:!!NOAH_VOICE_URL,ctx:null,src:null,tick:0,memo:new Map(),
+  seq:0,fails:0,cloud:!!NOAH_VOICE_URL&&!IN_APP,ctx:null,src:null,tick:0,memo:new Map(),
   clean(html){const d=document.createElement("div");d.innerHTML=html;return (d.textContent||"").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}✦★]/gu,"").replace(/\s+/g," ").trim();},
   audio(){if(this.ctx)return this.ctx;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{this.ctx=new AC();}catch(_){this.ctx=null;}return this.ctx;},
   unlock(){const c=this.audio();if(c&&c.state==="suspended")c.resume().catch(()=>{});},
@@ -3773,7 +3776,7 @@ function askNoah(raw){const q=(raw||"").trim();if(!q)return;NOAH3D.jiggle();
   const honest=()=>{noahSay("That's a great question, and asking it is real science. I don't have checked data on that yet, and I never make things up. Want to pin your question to the <b>Wonder Wall</b> so it isn't lost?",false);
     setChips([["📌 Pin it to my Wonder Wall","__pin:"+q]].concat(DEFAULT_CHIPS.slice(0,2)));};
   if(!NOAH_AI_URL)return honest();
-  if(!S.aiOn){honest();setChips([["📌 Pin it to my Wonder Wall","__pin:"+q],["🔓 Grown-ups: live answers","__ai:"+q]].concat(DEFAULT_CHIPS.slice(0,1)));return;}
+  if(!S.aiOn){honest();setChips([["📌 Pin it to my Wonder Wall","__pin:"+q],].concat(IN_APP?[]:[["🔓 Grown-ups: live answers","__ai:"+q]],DEFAULT_CHIPS.slice(0,1)));return;}
   noahSay("Let me think about that…",false);const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),15000);
   fetch(NOAH_AI_URL,{method:"POST",headers:{"Content-Type":"application/json"},signal:ctl.signal,body:JSON.stringify({question:q.slice(0,400),bigKid:S.bigKid})})
     .then(x=>x.json()).then(j=>{clearTimeout(tm);if(j&&typeof j.answer==="string"&&j.answer.trim())finish({say:esc(j.answer.slice(0,900))+' <span class="note">(live AI answer, check it like a scientist)</span>',local:true});else honest();}).catch(()=>{clearTimeout(tm);honest();});
@@ -3783,7 +3786,7 @@ const DEFAULT_CHIPS=[["❓ New here? Show me how","show me how"],["👪 Grown-up
 function setChips(list){const l=list||DEFAULT_CHIPS;$("#askChips").innerHTML=l.map(c=>'<button type="button" class="chip" data-ask="'+esc(c[1])+'">'+esc(c[0])+"</button>").join("");}
 document.addEventListener("click",e=>{const c=e.target.closest("[data-ask]");if(!c)return;const v=c.dataset.ask;
   if(v.startsWith("__how:")){window.__howOpen(v.slice(6));return;}
-  if(v.startsWith("__ai:")){const q=v.slice(5);
+  if(v.startsWith("__ai:")){const q=v.slice(5);if(IN_APP)return;
     openModal("🔓 Live answers (for grown-ups)",'<p>NOAH answers most questions from science data built into this page. With <b>live answers</b> on, a question NOAH cannot answer is sent to an AI service (Anthropic, through our server) to write a short, child-friendly reply.</p><p class="micnote">Only the typed question is sent. No name, account or cookie. We do not store questions. AI answers can be wrong, so NOAH labels them. This stays on until the page is closed.</p><p class="note">Please do not let children type names, addresses or other personal details.</p>'+parentGate("aiGate")+'<div class="row" style="margin-top:12px"><button class="btn primary" id="aiYes">I\'m a grown-up: turn it on</button><button class="btn" id="aiNo">Keep it off</button></div>');
     $("#aiYes").addEventListener("click",()=>{if(!parentGateOK("aiGate"))return;S.aiOn=true;closeModal();askNoah(q);});$("#aiNo").addEventListener("click",closeModal);return;}
   if(v.startsWith("__pin:")){S.journal.wonder.push({q:v.slice(6),hyp:"A question for NOAH that needs real data. Find out and write the answer here!",time:new Date().toLocaleString()});
@@ -4829,6 +4832,7 @@ function noahNarrate(){const last=new Map();let tm=0;
     s+='<i style="left:'+left+'%;width:'+size+'px;height:'+size+'px;animation-duration:'+dur+'s;animation-delay:-'+(k*2.3).toFixed(1)+'s"></i>';}
   b.innerHTML=s;})();
 $("#tick").innerHTML=(TICKS.join(" &nbsp;★&nbsp; ")+" &nbsp;★&nbsp; ").repeat(2);
+$("#noahClose").addEventListener("click",()=>{clearTimeout(noahSay._t);$("#noahBubble").classList.remove("on");Voice.stop();});
 $("#noahBtn").addEventListener("click",()=>{const b=$("#noahBubble");
   NOAH3D.jiggle();b.classList.contains("on")?(b.classList.remove("on"),Voice.stop()):noahSay(NOAH_TIPS[S.screen]||NOAH_TIPS.home);});
 ElemLab.init();SoundLab.init();CircLab.init();ChemLab.init();LightLab.init();MatterLab.init();MagnetLab.init();CrystalLab.init();DnaLab.init();BodyLab.init();NatureLab.init();MadLab.init();S.booted=true;updateCounts();
