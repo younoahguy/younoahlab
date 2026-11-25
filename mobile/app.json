@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "You Noah Lab",
+    "slug": "younoahlab",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#04051A",
+    "splash": {
+      "backgroundColor": "#04051A",
+      "resizeMode": "contain",
+      "image": "./assets/images/icon.png"
+    },
+    "ios": {
+      "bundleIdentifier": "com.younoahguy.younoahlab",
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "You Noah Lab can listen when a grown-up turns on talking to NOAH, so a child can ask questions out loud. The app never records or stores audio.",
+        "NSSpeechRecognitionUsageDescription": "You Noah Lab can turn spoken questions into text for NOAH after a grown-up allows it. Nothing said is stored by You Noah Lab.",
+        "CFBundleDisplayName": "You Noah Lab"
+      },
+      "privacyManifests": {
+        "NSPrivacyTracking": false,
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyCollectedDataTypes": []
+      }
+    },
+    "plugins": [
+      "expo-asset"
+    ],
+    "owner": "younoahguy"
+  }
+}
