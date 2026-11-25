@@ -83,3 +83,18 @@ test("home page has a Help button and links to the privacy page", () => {
   assert.match(html, /id="helpBtn"/, "no Help button in the header");
   assert.match(html, /href="privacy\.html"/, "home page does not link to privacy.html");
 });
+
+test("privacy page names a contact and is not marked as a draft", () => {
+  const html = read("privacy.html");
+  assert.match(html, /mailto:[^"]+@[^"]+/, "privacy page has no contact email");
+  assert.doesNotMatch(html, /Draft for legal review/i, "privacy page still says draft");
+  assert.match(html, /COPPA/, "privacy page has no COPPA section");
+});
+
+test("grown-up features: learning plan and a parental gate before mic and live answers", () => {
+  const html = read("index.html");
+  assert.match(html, /const PlanMaker=/, "learning plan maker missing");
+  assert.match(html, /parentGate\("aiGate"\)/, "live answers has no parental gate");
+  assert.match(html, /parentGate\("micGate"\)/, "microphone has no parental gate");
+  assert.doesNotMatch(html, /localStorage|sessionStorage|indexedDB|document\.cookie\s*=/, "the lab promises no browser storage");
+});
